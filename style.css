@@ -1,0 +1,197 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.loader {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.loader-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader::after {
+    content: "";
+    width: 60px;
+    height: 60px;
+    border: 16px solid #dddddd;
+    border-top-color: #043f8d;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+form {
+    width: 100%;
+    max-width: 640px;
+    background: #ccc;
+    margin: 30px auto;
+    padding: 30px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+form ol {
+    padding-left: 0;
+}
+
+form li,
+div > p {
+    background: #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    list-style-type: none;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+form img {
+    height: 72px;
+    max-width: 100%;
+    order: 1;
+}
+
+form p {
+    line-height: 36px;
+    padding-left: 12px;
+    flex: 1 1 auto;
+    font-size: 1.1rem;
+}
+
+form label,
+button {
+    background-color: #043f8d;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 1px ridge black;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    width: auto;
+}
+
+form label:hover,
+form button:hover {
+    background-color: #043f8d;
+    color: white;
+}
+
+form label:active,
+form button:active {
+    background-color: #0d3f8f;
+    color: white;
+}
+
+.form-center {
+    display: block;
+    justify-content: center;
+}
+
+.center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.center-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.label-picker {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #043f8d;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1000;
+    flex-wrap: wrap;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.label-picker button {
+    background-color: #ffffff;
+    color: #043f8d;
+    font-weight: bold;
+    border: 2px solid #043f8d;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.label-picker button:hover {
+    background-color: #e1e1e1;
+    transform: scale(1.05);
+}
+ main{
+    padding-bottom: 80px;
+ }
+
+
+@media (max-width: 600px) {
+    html {
+        font-size: 10px;
+    }
+
+    form {
+        padding: 5px;
+        margin: 5px;
+    }
+
+    form li,
+    div > p {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    form label,
+    button {
+        width: 100%;
+        margin-top: 0px;
+        font-size: 1.0rem;
+    }
+    .label-picker button{
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
