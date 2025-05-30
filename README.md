@@ -120,6 +120,88 @@ To add your own label templates, place PDF files in the `templates/` folder and 
 - **PDFs Not Printing Correctly:** Only the first page of multi-page PDFs will be used.
 - **Web Bluetooth Security:** Scanning and connecting to printers must be triggered by a user gesture (e.g., button click).
 
+## Additional Implementation Details
+
+### Extended Project Structure
+
+- `node_modules` – includes `bundle.js` required for the Brady Web SDK to work in-browser
+- `templates` – contains default PDF files as label templates
+
+### HTML Overview
+
+- `<div class="preview">`  
+  Shows a preview of the image or template to be printed.
+
+- Label Template Buttons (Label 1, Label 2, Warning):  
+  Load a template PDF from `/templates/*.pdf`, convert it to PNG, and display a preview.
+
+- `<p id="statusLabel">`  
+  Dynamically displays current printer status or action results.
+
+### Main Script Highlights
+
+- **SDK Initialization:**  
+  ```js
+  const bradySdk = new BradySdk(printerUpdatesCallback, false)
+  ```
+- **BLE Device Scanning:**  
+  ```js
+  await bradySdk.showDiscoveredBleDevices()
+  ```
+- **File Upload & Preview:**  
+  ```js
+  input.addEventListener('change', updateImageDisplay)
+  ```
+- **PDF Conversion:**  
+  ```js
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+  const page = await pdf.getPage(1)
+  page.render(...).promise
+  ```
+- **Template Selection:**  
+  ```js
+  async function selectTemplate(templateName)
+  window.selectTemplate = selectTemplate
+  ```
+- **Printing:**  
+  ```js
+  await bradySdk.printBitmap(imageToPrint, 0.2, 0.0)
+  ```
+- **Printer Commands:**  
+  ```js
+  await bradySdk.feed()
+  await bradySdk.cut()
+  await bradySdk.disconnect()
+  ```
+- **Status Output:**  
+  ```js
+  statusLabel.innerText = `
+  PrinterStatus: ${bradySdk.status}
+  PrinterName: ${bradySdk.printerName}
+  ...`
+  ```
+- **Local Storage:**  
+  Uses `localStorage.setItem("imageToPrint", ...)` to remember the last used image.
+
+- **UI Helper:**  
+  `window.toggleCutAfterRowOption()` shows/hides the "cut after row" input based on selected cut option.
+
+### Additional Supported Frameworks
+
+- Svelte (via JS imports)
+- Next.js (client-side only)
+
+### REST API Integration
+
+- You can call the SDK from any front-end framework using REST API patterns.
+
+### Angular Integration Example
+
+```js
+import { BradyPrinter } from 'brady-web-sdk';
+const printer = new BradyPrinter();
+```
+
 ## License
 
 MIT License
