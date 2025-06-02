@@ -1,7 +1,9 @@
 # Portable Printer
 
 A web application for printing images and PDFs using Brady portable printers via Bluetooth.  
-This project leverages the Brady Web SDK to enable browser-based communication with supported Brady printers.
+This projec leverages the Brady Web SDK to enable browser-based communication with supported Brady printers.
+
+https://portable-printer.mts.sk - not working on internal network/VPN; necessary https to allow bluetooth usage from PC-browsers
 
 ## Features
 
